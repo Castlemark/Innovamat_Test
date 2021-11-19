@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tweenable : MonoBehaviour
+public abstract class Tweenable : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] protected RectTransform rectTransform;
 
-    // Update is called once per frame
-    void Update()
+    protected IEnumerator Tween(float duration, Vector2 origin, Vector2 destination)
     {
-        
+        var timer = 0f;
+        while (timer < duration)
+        {
+            var ratio = timer / duration;
+            rectTransform.localPosition = Vector2.Lerp(origin, destination, ratio);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        rectTransform.localPosition = destination;
     }
 }

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class NumberTextController : MonoBehaviour
+public class NumberTextController : Tweenable
 {
     [SerializeField] private TextMeshProUGUI text;
-    [SerializeField] private RectTransform rectTransform;
 
     private Vector2 initialPos;
     private Vector2 midPos;
@@ -33,18 +32,5 @@ public class NumberTextController : MonoBehaviour
 
         yield return Tween(2f, midPos, finalPos);
         rectTransform.localPosition = finalPos;
-    }
-
-    private IEnumerator Tween(float duration, Vector2 origin, Vector2 destination)
-    {
-        var timer = 0f;
-        while (timer < duration)
-        {
-            var ratio = timer / duration;
-            rectTransform.localPosition = Vector2.Lerp(origin, destination, ratio);
-            timer += Time.deltaTime;
-            yield return null;
-        }
-        rectTransform.localPosition = destination;
     }
 }

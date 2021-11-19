@@ -14,7 +14,6 @@ public class GameConfig : ScriptableObject
     {
         Spanish,
         English,
-        Catalan
     }
 
     public INumberToText GetNumberToTextGenerator()

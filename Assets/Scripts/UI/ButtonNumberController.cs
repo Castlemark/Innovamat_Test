@@ -4,12 +4,11 @@ using TMPro;
 using UnityEngine.UI;
 using System;
 
-public class ButtonNumberController : MonoBehaviour
+public class ButtonNumberController : Tweenable
 {
     public event Action<int, ButtonNumberController> buttonClicked;
 
     [SerializeField] private TextMeshProUGUI numeralText;
-    [SerializeField] private RectTransform rectTransform;
     [SerializeField] private Button button;
     [SerializeField] private Image buttonImg;
     private int number;
@@ -69,18 +68,5 @@ public class ButtonNumberController : MonoBehaviour
     {
         buttonImg.color = Color.red;
         yield return ExitAnimation();
-    }
-
-    private IEnumerator Tween(float duration, Vector2 origin, Vector2 destination)
-    {
-        var timer = 0f;
-        while (timer < duration)
-        {
-            var ratio = timer / duration;
-            rectTransform.localPosition = Vector2.Lerp(origin, destination, ratio);
-            timer += Time.deltaTime;
-            yield return null;
-        }
-        rectTransform.localPosition = destination;
     }
 }
